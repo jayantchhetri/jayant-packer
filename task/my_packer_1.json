@@ -1,0 +1,30 @@
+{
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "region": "ap-south-1",
+            "ami_name": "my-second-packer-ami",
+            "source_ami": "ami-08ee6644906ff4d6c",
+            "instance_type": "t2.micro",
+            "ssh_username": "ubuntu"
+
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "script.sh"
+        },
+        {
+            "type": "file",
+            "source": "index.html",
+            "destination": "/tmp/"
+        },
+        {
+            "type": "shell",
+            "inline": ["sudo cp /tmp/index.html /var/www/html/"]
+        }
+    ]
+
+    
+}
